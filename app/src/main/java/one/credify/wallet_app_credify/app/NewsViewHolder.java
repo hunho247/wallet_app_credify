@@ -1,9 +1,12 @@
-package com.inducesmile.retrofit2;
+package one.credify.wallet_app_credify.app;
 
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import one.credify.wallet_app_credify.R;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 

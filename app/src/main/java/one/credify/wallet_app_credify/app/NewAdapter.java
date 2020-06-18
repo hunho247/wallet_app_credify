@@ -1,20 +1,24 @@
-package com.inducesmile.retrofit2;
+package one.credify.wallet_app_credify.app;
 
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
+
+import one.credify.wallet_app_credify.R;
+import one.credify.wallet_app_credify.core.model.Wallet;
 
 public class NewAdapter extends RecyclerView.Adapter<NewsViewHolder>{
 
     private Context context;
-    private List<ApiObject> apiObjectList;
+    private List<Wallet> apiObjectList;
 
-    public NewAdapter(Context context, List<ApiObject> apiObjects){
+    public NewAdapter(Context context, List<Wallet> apiObjects){
         this.context = context;
         this.apiObjectList =  apiObjects;
     }
@@ -27,7 +31,7 @@ public class NewAdapter extends RecyclerView.Adapter<NewsViewHolder>{
 
     @Override
     public void onBindViewHolder(NewsViewHolder holder, int position) {
-        ApiObject apiObject = apiObjectList.get(position);
+        Wallet apiObject = apiObjectList.get(position);
         holder.title.setText(apiObject.getTitle());
         holder.description.setText(apiObject.getDescription());
     }

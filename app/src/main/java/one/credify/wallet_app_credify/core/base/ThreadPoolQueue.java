@@ -1,10 +1,6 @@
-package org.mifos.mobilewallet.core.base;
+package one.credify.wallet_app_credify.core.base;
 
 import java.util.concurrent.ArrayBlockingQueue;
-
-/**
- * Created by shivansh on 14/July/2019
- */
 
 public final class ThreadPoolQueue extends ArrayBlockingQueue<Runnable> {
 

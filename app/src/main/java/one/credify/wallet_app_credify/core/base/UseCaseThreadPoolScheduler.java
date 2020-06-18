@@ -1,4 +1,4 @@
-package org.mifos.mobilewallet.core.base;
+package one.credify.wallet_app_credify.core.base;
 
 import android.os.Handler;
 
@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
  * {@link java.util.concurrent.ExecutorService}s for different scenarios.
  */
 public class UseCaseThreadPoolScheduler implements UseCaseScheduler {
-
     public static final int POOL_SIZE = 2;
     public static final int MAX_POOL_SIZE = 40;
     public static final int TIMEOUT = 60;

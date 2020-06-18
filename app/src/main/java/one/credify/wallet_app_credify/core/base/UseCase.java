@@ -1,4 +1,4 @@
-package org.mifos.mobilewallet.core.base;
+package one.credify.wallet_app_credify.core.base;
 
 /**
  * Use cases are the entry points to the domain layer.

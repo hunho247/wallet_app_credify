@@ -1,4 +1,4 @@
-package one.credify.wallet_app_credify.core.services;
+package one.credify.wallet_app_credify.core.repository;
 
 
 import com.google.gson.Gson;
