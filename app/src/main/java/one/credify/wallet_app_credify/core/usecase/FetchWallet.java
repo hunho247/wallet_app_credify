@@ -12,11 +12,10 @@ import retrofit2.Response;
 
 public class FetchWallet extends UseCase<FetchWallet.RequestValues,
         FetchWallet.ResponseValue> {
-
     @Override
     protected void executeUseCase(RequestValues requestValues) {
 
-        Repository.getServiceClass().getCoins().enqueue(new Callback<List<Coin>>() {
+        Repository.getWalletService().getCoins().enqueue(new Callback<List<Coin>>() {
             @Override
             public void onResponse(Call<List<Coin>> call, Response<List<Coin>> response) {
                 if (response.isSuccessful()) {
@@ -28,22 +27,22 @@ public class FetchWallet extends UseCase<FetchWallet.RequestValues,
             @Override
             public void onFailure(Call<List<Coin>> call, Throwable t) {
                 //showErrorMessage();
-                getUseCaseCallback().onFailure(Constants.ERROR_FETCHING_COINS);
+                getUseCaseCallback().onFailure(Constants.ERROR_FETCHING);
             }
         });
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
-
         private final long clientId;
+        private final long token;
 
-        public RequestValues(long clientId) {
+        public RequestValues(long clientId, long token) {
             this.clientId = clientId;
+            this.token = token;
         }
     }
 
     public static final class ResponseValue implements UseCase.ResponseValue {
-
         private final List<Coin> coins;
 
         public ResponseValue(List<Coin> coins) {

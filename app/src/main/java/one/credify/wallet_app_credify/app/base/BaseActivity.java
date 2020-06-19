@@ -2,24 +2,23 @@ package one.credify.wallet_app_credify.app.base;
 
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
+import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import one.credify.wallet_app_credify.R;
 
 public class BaseActivity extends AppCompatActivity implements BaseActivityCallback {
-    public Toolbar toolbar;
     public ProgressDialog progressDialog;
 
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        toolbar = findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-        }
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.custom_toolbar);
+        getSupportActionBar().setElevation(0);
     }
 
     @Override
@@ -51,8 +50,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityCallb
 
     @Override
     public void setToolbarTitle(String title) {
-        if (getSupportActionBar() != null && getTitle() != null) {
-            setTitle(title);
+        TextView textView = getSupportActionBar().getCustomView().findViewById(R.id.toolbar_title);
+        if (textView != null) {
+            textView.setText(title);
         }
     }
 }

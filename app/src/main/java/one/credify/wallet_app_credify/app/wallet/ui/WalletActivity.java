@@ -18,13 +18,12 @@ import one.credify.wallet_app_credify.app.wallet.presenter.WalletPresenter;
 import one.credify.wallet_app_credify.core.model.Coin;
 
 public class WalletActivity extends BaseActivity implements WalletContract.WalletView {
-    private final String TAG = MainActivity.class.getSimpleName();
     private WalletContract.TransactionWalletPresenter mTransactionWallet;
 
-    @BindView(R.id.recycler_id)
-    RecyclerView recyclerView;
+    @BindView(R.id.rv_wallet)
+    RecyclerView rvWallet;
 
-    WalletAdapter mWalletAdapter;
+    private WalletAdapter mWalletAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +34,16 @@ public class WalletActivity extends BaseActivity implements WalletContract.Walle
         mTransactionWallet = new WalletPresenter(this);
         mWalletAdapter = new WalletAdapter();
 
-        recyclerView.setAdapter(mWalletAdapter);
+        rvWallet.setAdapter(mWalletAdapter);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+        rvWallet.setLayoutManager(new LinearLayoutManager(this));
+        rvWallet.setHasFixedSize(true);
 
         mTransactionWallet.fetchWallets();
     }
 
     @Override
     public void showWallets(List<Coin> coins) {
-//        NewAdapter adapter = new NewAdapter(getApplicationContext(), wallets);
-//        recyclerView.setAdapter(adapter);
         mWalletAdapter.setData(coins);
     }
 

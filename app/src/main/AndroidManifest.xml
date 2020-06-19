@@ -22,6 +22,9 @@
         <activity
             android:name=".app.wallet.ui.WalletActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".app.history.ui.HistoryActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

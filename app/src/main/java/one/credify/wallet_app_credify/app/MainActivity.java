@@ -16,23 +16,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import one.credify.wallet_app_credify.R;
+import one.credify.wallet_app_credify.app.base.BaseActivity;
+import one.credify.wallet_app_credify.app.history.ui.HistoryActivity;
 import one.credify.wallet_app_credify.app.wallet.ui.WalletActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private final String TAG = MainActivity.class.getSimpleName();
 
     @BindView(R.id.buttonid)
     Button buttonid;
 
-
-    @OnClick(R.id.buttonid)
-    void turnOnFlash() {
-        Intent intent = new Intent(MainActivity.this, WalletActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-//                Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        Intent intent = new Intent(MainActivity.this, WalletActivity.class);
+        Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
 //                Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

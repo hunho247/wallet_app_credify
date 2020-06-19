@@ -24,7 +24,7 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_casual_list,
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_coin_list,
                 parent, false);
         return new ViewHolder(v);
     }
@@ -47,22 +47,8 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.ViewHolder
         }
     }
 
-    public void setData(List<Coin> bankAccountDetailsList) {
-        this.mCoins = bankAccountDetailsList;
-        notifyDataSetChanged();
-    }
-
-    public Coin getBankDetails(int position) {
-        return mCoins.get(position);
-    }
-
-    public void addBank(Coin bankAccountDetails) {
-        mCoins.add(bankAccountDetails);
-        notifyDataSetChanged();
-    }
-
-    public void setBankDetails(int index, Coin bankAccountDetails) {
-        mCoins.set(index, bankAccountDetails);
+    public void setData(List<Coin> coins) {
+        this.mCoins = coins;
         notifyDataSetChanged();
     }
 

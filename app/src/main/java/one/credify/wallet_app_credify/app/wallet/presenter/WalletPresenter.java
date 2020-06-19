@@ -26,7 +26,7 @@ public class WalletPresenter implements WalletContract.TransactionWalletPresente
     @Override
     public void fetchWallets() {
         UseCaseHandler.getInstance().execute(new FetchWallet(),
-                new FetchWallet.RequestValues(12345),
+                new FetchWallet.RequestValues(12345, 99999),
                 new UseCase.UseCaseCallback<FetchWallet.ResponseValue>() {
                     @Override
                     public void onSuccess(FetchWallet.ResponseValue response) {
