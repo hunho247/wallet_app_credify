@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-
+        Intent intent = new Intent(MainActivity.this, WalletActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+//                Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

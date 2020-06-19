@@ -2,11 +2,11 @@ package one.credify.wallet_app_credify.core.services;
 
 import java.util.List;
 
-import one.credify.wallet_app_credify.core.model.Wallet;
+import one.credify.wallet_app_credify.core.model.Coin;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface WalletService {
-    @GET("v3/f4b2ac77-9845-4c30-b0b6-e977d72e1728")
-    public Call<List<Wallet>> getAllPost();
+    @GET("da42f783-8086-4d6c-8e85-177f508aab98")
+    public Call<List<Coin>> getCoins();
 }

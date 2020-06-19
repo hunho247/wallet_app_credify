@@ -6,6 +6,6 @@ public class Constants {
     private static final int SUPER_USER_ROLE_ID = 1;
 
 
-    public static final String ERROR_FETCHING_WALLET = "Error fetching wallet";
+    public static final String ERROR_FETCHING_COINS = "Error fetching coins";
 
 }

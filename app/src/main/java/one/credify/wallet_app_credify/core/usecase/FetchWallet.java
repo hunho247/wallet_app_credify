@@ -3,7 +3,7 @@ package one.credify.wallet_app_credify.core.usecase;
 import java.util.List;
 
 import one.credify.wallet_app_credify.core.usecase.base.UseCase;
-import one.credify.wallet_app_credify.core.model.Wallet;
+import one.credify.wallet_app_credify.core.model.Coin;
 import one.credify.wallet_app_credify.core.repository.Repository;
 import one.credify.wallet_app_credify.core.utils.Constants;
 import retrofit2.Call;
@@ -16,21 +16,19 @@ public class FetchWallet extends UseCase<FetchWallet.RequestValues,
     @Override
     protected void executeUseCase(RequestValues requestValues) {
 
-        Repository.getServiceClass().getAllPost().enqueue(new Callback<List<Wallet>>() {
+        Repository.getServiceClass().getCoins().enqueue(new Callback<List<Coin>>() {
             @Override
-            public void onResponse(Call<List<Wallet>> call, Response<List<Wallet>> response) {
+            public void onResponse(Call<List<Coin>> call, Response<List<Coin>> response) {
                 if (response.isSuccessful()) {
-                    List<Wallet> postList = response.body();
-//                    NewAdapter adapter = new NewAdapter(getApplicationContext(), postList);
-//                    recyclerView.setAdapter(adapter);
+                    List<Coin> postList = response.body();
                     getUseCaseCallback().onSuccess(new ResponseValue(postList));
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Wallet>> call, Throwable t) {
+            public void onFailure(Call<List<Coin>> call, Throwable t) {
                 //showErrorMessage();
-                getUseCaseCallback().onFailure(Constants.ERROR_FETCHING_WALLET);
+                getUseCaseCallback().onFailure(Constants.ERROR_FETCHING_COINS);
             }
         });
     }
@@ -46,14 +44,14 @@ public class FetchWallet extends UseCase<FetchWallet.RequestValues,
 
     public static final class ResponseValue implements UseCase.ResponseValue {
 
-        private final List<Wallet> wallets;
+        private final List<Coin> coins;
 
-        public ResponseValue(List<Wallet> wallets) {
-            this.wallets = wallets;
+        public ResponseValue(List<Coin> coins) {
+            this.coins = coins;
         }
 
-        public List<Wallet> getWallets() {
-            return wallets;
+        public List<Coin> getCoins() {
+            return coins;
         }
     }
 }
