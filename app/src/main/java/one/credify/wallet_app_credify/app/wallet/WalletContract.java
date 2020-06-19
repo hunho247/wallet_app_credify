@@ -9,9 +9,13 @@ import one.credify.wallet_app_credify.core.model.Coin;
 public interface WalletContract {
     interface WalletView extends BaseView<TransactionWalletPresenter> {
         void showWallets(List<Coin> coins);
+
+        void startHistoryActivity(Coin coin);
     }
 
     interface TransactionWalletPresenter extends BasePresenter {
         void fetchWallets();
+
+        void handleWalletClick(int index);
     }
 }

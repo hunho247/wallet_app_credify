@@ -7,5 +7,13 @@ public interface BaseActivityCallback {
 
     void cancelProgressDialog();
 
+    void showBackButton();
+
+    void hideBackButton();
+
+    void showCloseButton();
+
+    void hideCloseButton();
+
     void setToolbarTitle(String title);
 }

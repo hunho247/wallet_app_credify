@@ -13,6 +13,7 @@ import one.credify.wallet_app_credify.core.usecase.base.UseCaseHandler;
 
 public class WalletPresenter implements WalletContract.TransactionWalletPresenter {
     private WalletContract.WalletView mWalletView;
+    private List<Coin> mCoins;
 
     public WalletPresenter(BaseView baseView) {
         attachView(baseView);
@@ -30,8 +31,8 @@ public class WalletPresenter implements WalletContract.TransactionWalletPresente
                 new UseCase.UseCaseCallback<FetchWallet.ResponseValue>() {
                     @Override
                     public void onSuccess(FetchWallet.ResponseValue response) {
-                        List<Coin> coins = response.getCoins();
-                        mWalletView.showWallets(coins);
+                        mCoins = response.getCoins();
+                        mWalletView.showWallets(mCoins);
                     }
 
                     @Override
@@ -39,5 +40,12 @@ public class WalletPresenter implements WalletContract.TransactionWalletPresente
                         Log.d(WalletPresenter.class.getSimpleName(), "error fetching from API");
                     }
                 });
+    }
+
+    @Override
+    public void handleWalletClick(int index) {
+        if (mCoins != null) {
+            mWalletView.startHistoryActivity(mCoins.get(index));
+        }
     }
 }
