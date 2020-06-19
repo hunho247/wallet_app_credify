@@ -1,11 +1,6 @@
-package one.credify.wallet_app_credify.core.base;
+package one.credify.wallet_app_credify.core.usecase.base;
 
-
-/**
- * Runs {@link UseCase}s using a {@link UseCaseScheduler}.
- */
 public class UseCaseHandler {
-
     private static UseCaseHandler instance;
 
     private final UseCaseScheduler mUseCaseScheduler;
@@ -16,7 +11,7 @@ public class UseCaseHandler {
 
     public static UseCaseHandler getInstance() {
         if (instance == null) {
-            instance = new UseCaseHandler(new UseCaseThreadPoolScheduler());
+            instance = new UseCaseHandler(new UseCaseThreadPoolExecutor());
         }
         return instance;
     }
@@ -24,7 +19,7 @@ public class UseCaseHandler {
     public <T extends UseCase.RequestValues, R extends UseCase.ResponseValue> void execute(
             final UseCase<T, R> useCase, T values, UseCase.UseCaseCallback<R> callback) {
         useCase.setRequestValues(values);
-        useCase.setUseCaseCallback(new UiCallbackWrapper(callback, this));
+        useCase.setUseCaseCallback(new UiCallbackWrapper(callback, mUseCaseScheduler));
 
         mUseCaseScheduler.execute(new Runnable() {
             @Override
@@ -34,35 +29,25 @@ public class UseCaseHandler {
         });
     }
 
-    public <V extends UseCase.ResponseValue> void notifyResponse(final V response,
-            final UseCase.UseCaseCallback<V> useCaseCallback) {
-        mUseCaseScheduler.notifyResponse(response, useCaseCallback);
-    }
-
-    private <V extends UseCase.ResponseValue> void notifyError(final String message,
-            final UseCase.UseCaseCallback<V> useCaseCallback) {
-        mUseCaseScheduler.onError(message, useCaseCallback);
-    }
-
     private static final class UiCallbackWrapper<V extends UseCase.ResponseValue> implements
             UseCase.UseCaseCallback<V> {
         private final UseCase.UseCaseCallback<V> mCallback;
-        private final UseCaseHandler mUseCaseHandler;
+        private final UseCaseScheduler mUseCaseScheduler;
 
         public UiCallbackWrapper(UseCase.UseCaseCallback<V> callback,
-                UseCaseHandler useCaseHandler) {
+                                 UseCaseScheduler useCaseScheduler) {
             mCallback = callback;
-            mUseCaseHandler = useCaseHandler;
+            mUseCaseScheduler = useCaseScheduler;
         }
 
         @Override
         public void onSuccess(V response) {
-            mUseCaseHandler.notifyResponse(response, mCallback);
+            mUseCaseScheduler.notifyResponse(response, mCallback);
         }
 
         @Override
-        public void onError(String message) {
-            mUseCaseHandler.notifyError(message, mCallback);
+        public void onFailure(String message) {
+            mUseCaseScheduler.onError(message, mCallback);
         }
     }
 }

@@ -1,4 +1,4 @@
-package one.credify.wallet_app_credify.core.base;
+package one.credify.wallet_app_credify.core.usecase.base;
 
 /**
  * Use cases are the entry points to the domain layer.
@@ -48,6 +48,6 @@ public abstract class UseCase<Q extends UseCase.RequestValues, P extends UseCase
     public interface UseCaseCallback<R> {
         void onSuccess(R response);
 
-        void onError(String message);
+        void onFailure(String message);
     }
 }

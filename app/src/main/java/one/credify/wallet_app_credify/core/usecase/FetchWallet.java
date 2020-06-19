@@ -2,7 +2,7 @@ package one.credify.wallet_app_credify.core.usecase;
 
 import java.util.List;
 
-import one.credify.wallet_app_credify.core.base.UseCase;
+import one.credify.wallet_app_credify.core.usecase.base.UseCase;
 import one.credify.wallet_app_credify.core.model.Wallet;
 import one.credify.wallet_app_credify.core.repository.Repository;
 import one.credify.wallet_app_credify.core.utils.Constants;
@@ -30,7 +30,7 @@ public class FetchWallet extends UseCase<FetchWallet.RequestValues,
             @Override
             public void onFailure(Call<List<Wallet>> call, Throwable t) {
                 //showErrorMessage();
-                getUseCaseCallback().onError(Constants.ERROR_FETCHING_WALLET);
+                getUseCaseCallback().onFailure(Constants.ERROR_FETCHING_WALLET);
             }
         });
     }

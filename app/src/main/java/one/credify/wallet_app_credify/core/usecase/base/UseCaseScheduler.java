@@ -1,10 +1,6 @@
-package one.credify.wallet_app_credify.core.base;
+package one.credify.wallet_app_credify.core.usecase.base;
 
-/**
- * Interface for schedulers, see {@link UseCaseThreadPoolScheduler}.
- */
 public interface UseCaseScheduler {
-
     void execute(Runnable runnable);
 
     <V extends UseCase.ResponseValue> void notifyResponse(final V response,

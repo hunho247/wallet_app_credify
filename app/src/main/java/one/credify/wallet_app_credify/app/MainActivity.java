@@ -4,48 +4,42 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import one.credify.wallet_app_credify.R;
-import one.credify.wallet_app_credify.core.base.UseCase;
-import one.credify.wallet_app_credify.core.base.UseCaseHandler;
-import one.credify.wallet_app_credify.core.model.Wallet;
-import one.credify.wallet_app_credify.core.usecase.FetchWallet;
+import one.credify.wallet_app_credify.app.wallet.ui.WalletActivity;
+
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = MainActivity.class.getSimpleName();
 
-    private RecyclerView recyclerView;
+    @BindView(R.id.buttonid)
+    Button buttonid;
 
+
+    @OnClick(R.id.buttonid)
+    void turnOnFlash() {
+        Intent intent = new Intent(MainActivity.this, WalletActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+//                Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        //mUseCaseHandler = UseCaseHandler.getInstance();
-
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_id);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setHasFixedSize(true);
 
-        UseCaseHandler.getInstance().execute(new FetchWallet(),
-                new FetchWallet.RequestValues(12345),
-                new UseCase.UseCaseCallback<FetchWallet.ResponseValue>() {
-                    @Override
-                    public void onSuccess(FetchWallet.ResponseValue response) {
-                        List<Wallet> wallets = response.getWallets();
-                        NewAdapter adapter = new NewAdapter(getApplicationContext(), wallets);
-                        recyclerView.setAdapter(adapter);
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        Log.d(TAG, "error loading from API");
-                    }
-                });
     }
 }
