@@ -2,12 +2,17 @@ package one.credify.wallet_app_credify.app.transfer.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import androidx.annotation.NonNull;
+
+import com.budiyev.android.codescanner.CodeScanner;
+import com.budiyev.android.codescanner.CodeScannerView;
+import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import one.credify.wallet_app_credify.R;
 import one.credify.wallet_app_credify.app.base.BaseActivity;
 import one.credify.wallet_app_credify.app.transfer.TransferContract;
@@ -16,11 +21,10 @@ import one.credify.wallet_app_credify.core.model.Coin;
 import one.credify.wallet_app_credify.core.utils.CoinHelper;
 import one.credify.wallet_app_credify.core.utils.Constants;
 
-public class TransferQrScanActivity extends BaseActivity implements TransferContract.TransferQrScanView, ZXingScannerView.ResultHandler {
+public class TransferQrScanActivity extends BaseActivity implements TransferContract.TransferQrScanView {
     private TransferContract.TransferQrScanPresenter mTransferQrScan;
-
-    @BindView(R.id.qr_scan_view)
-    ZXingScannerView qrScanView;
+    private CodeScanner mCodeScanner;
+    private CodeScannerView qrScanView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +32,14 @@ public class TransferQrScanActivity extends BaseActivity implements TransferCont
         setContentView(R.layout.activity_transfer_qr_scan);
         ButterKnife.bind(this);
 
+        qrScanView = findViewById(R.id.qr_scan_view);
+        mCodeScanner = new CodeScanner(this, qrScanView);
         mTransferQrScan = new TransferQrScanPresenter(this);
 
         receiveUIData();
         setupUI();
         // test
-        handleResultTest("ho thai hung");
+        //switchToConfirmationScreen("6dfere7fdg5d7fg8fdg98xxx");
     }
 
     private void receiveUIData() {
@@ -48,30 +54,33 @@ public class TransferQrScanActivity extends BaseActivity implements TransferCont
         setToolbarTitle("Transfer " + coinName);
         hideBackButton();
 
-        qrScanView.setAutoFocus(true);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        qrScanView.stopCamera();
+        mCodeScanner.setDecodeCallback(new DecodeCallback() {
+            @Override
+            public void onDecoded(@NonNull final Result result) {
+                switchToConfirmationScreen(result.getText());
+            }
+        });
+        qrScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCodeScanner.startPreview();
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        qrScanView.setResultHandler(this);
-        qrScanView.startCamera();
+        mCodeScanner.startPreview();
     }
 
     @Override
-    public void handleResult(Result result) {
-        handleResultTest(result.getText());
+    public void onPause() {
+        super.onPause();
+        mCodeScanner.releaseResources();
     }
 
-    public void handleResultTest(String str) {
-        String qrData = str;
-
+    private void switchToConfirmationScreen(String qrData) {
         Intent intent = new Intent(this, TransferConfirmationActivity.class);
         intent.putExtra(Constants.TRANSFER_QR_DATA, qrData);
         intent.putExtra(Constants.TRANSFER_COIN_INTENT, mTransferQrScan.getCoinData());
