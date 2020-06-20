@@ -1,7 +1,5 @@
 package one.credify.wallet_app_credify.app.wallet.presenter;
 
-import android.util.Log;
-
 import java.util.List;
 
 import one.credify.wallet_app_credify.app.base.BaseView;
@@ -37,7 +35,7 @@ public class WalletPresenter implements WalletContract.TransactionWalletPresente
 
                     @Override
                     public void onFailure(String message) {
-                        Log.d(WalletPresenter.class.getSimpleName(), "error fetching from API");
+                        mWalletView.showFailureDialog(message);
                     }
                 });
     }

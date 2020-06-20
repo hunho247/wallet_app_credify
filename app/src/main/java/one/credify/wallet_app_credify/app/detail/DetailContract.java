@@ -10,6 +10,8 @@ import one.credify.wallet_app_credify.core.model.History;
 public interface DetailContract {
     interface DetailView extends BaseView<DetailContract.TransactionDetailPresenter> {
         void showHistories(List<History> histories);
+
+        void showFailureDialog(String message);
     }
 
     interface TransactionDetailPresenter extends BasePresenter {

@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import one.credify.wallet_app_credify.R;
 import one.credify.wallet_app_credify.core.model.Coin;
+import one.credify.wallet_app_credify.core.utils.CoinHelper;
 
 public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.ViewHolder> {
     private List<Coin> mCoins;
@@ -27,10 +28,18 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.ViewHolder
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Coin coin = mCoins.get(position);
-        holder.mTvCoinSign.setText(coin.getCoinName().charAt(0) + "");
-        holder.mTvCoinPrice.setText(coin.getCoinPrice());
-        holder.mTvCoinAmount.setText(coin.getCoinAmount());
-        holder.mTvCoinName.setText(coin.getCoinName());
+
+        String coinSign = CoinHelper.getCoinSign(coin.getCoinUnit());
+        holder.mTvCoinSign.setText(coinSign);
+
+        String coinPrice = CoinHelper.getCoinPrice(coin.getCoinUnit(), coin.getCoinAmount()) + " USD";
+        holder.mTvCoinPrice.setText(coinPrice);
+
+        String coinAmount = coin.getCoinAmount() + " " + coin.getCoinUnit();
+        holder.mTvCoinAmount.setText(coinAmount);
+
+        String coinName = CoinHelper.getCoinName(coin.getCoinUnit());
+        holder.mTvCoinName.setText(coinName);
     }
 
     @Override

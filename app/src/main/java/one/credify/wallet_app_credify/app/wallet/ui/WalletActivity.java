@@ -3,6 +3,7 @@ package one.credify.wallet_app_credify.app.wallet.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,8 @@ public class WalletActivity extends BaseActivity implements WalletContract.Walle
 
     @BindView(R.id.rv_wallet)
     RecyclerView rvWallet;
+    @BindView(R.id.pb_wallet_loading)
+    ProgressBar pbWalletLoading;
 
     private WalletAdapter mWalletAdapter;
 
@@ -62,6 +65,7 @@ public class WalletActivity extends BaseActivity implements WalletContract.Walle
     @Override
     public void showWallets(List<Coin> coins) {
         mWalletAdapter.setData(coins);
+        pbWalletLoading.setVisibility(View.GONE);
     }
 
     @Override
@@ -69,6 +73,12 @@ public class WalletActivity extends BaseActivity implements WalletContract.Walle
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(Constants.WALLET_COIN_INTENT, coin);
         startActivity(intent);
+    }
+
+    @Override
+    public void showFailureDialog(String message) {
+        showAlertDialog("Failure!",message);
+        pbWalletLoading.setVisibility(View.GONE);
     }
 
     @Override

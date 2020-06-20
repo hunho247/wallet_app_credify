@@ -11,6 +11,8 @@ public interface WalletContract {
         void showWallets(List<Coin> coins);
 
         void startHistoryActivity(Coin coin);
+
+        void showFailureDialog(String message);
     }
 
     interface TransactionWalletPresenter extends BasePresenter {

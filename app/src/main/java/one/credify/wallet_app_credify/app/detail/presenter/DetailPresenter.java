@@ -1,7 +1,5 @@
 package one.credify.wallet_app_credify.app.detail.presenter;
 
-import android.util.Log;
-
 import one.credify.wallet_app_credify.app.base.BaseView;
 import one.credify.wallet_app_credify.app.detail.DetailContract;
 import one.credify.wallet_app_credify.core.model.Coin;
@@ -34,7 +32,7 @@ public class DetailPresenter implements DetailContract.TransactionDetailPresente
 
                     @Override
                     public void onFailure(String message) {
-                        Log.d(DetailPresenter.class.getSimpleName(), "error fetching from API");
+                        mDetailView.showFailureDialog(message);
                     }
                 });
     }

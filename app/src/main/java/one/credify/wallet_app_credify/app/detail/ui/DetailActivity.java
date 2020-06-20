@@ -26,6 +26,7 @@ import one.credify.wallet_app_credify.app.receive.ui.ReceiveActivity;
 import one.credify.wallet_app_credify.app.transfer.ui.TransferQrScanActivity;
 import one.credify.wallet_app_credify.core.model.Coin;
 import one.credify.wallet_app_credify.core.model.History;
+import one.credify.wallet_app_credify.core.utils.CoinHelper;
 import one.credify.wallet_app_credify.core.utils.Constants;
 
 public class DetailActivity extends BaseActivity implements DetailContract.DetailView {
@@ -35,8 +36,8 @@ public class DetailActivity extends BaseActivity implements DetailContract.Detai
     @BindView(R.id.rv_history)
     RecyclerView rvHistory;
 
-    @BindView(R.id.pb_loading)
-    ProgressBar pbLoading;
+    @BindView(R.id.pb_history_loading)
+    ProgressBar pbHistoryLoading;
 
     @OnClick(R.id.bt_receive)
     public void btReceiveOnClick() {
@@ -84,7 +85,9 @@ public class DetailActivity extends BaseActivity implements DetailContract.Detai
     }
 
     private void setupUI() {
-        setToolbarTitle(mTransactionDetail.getCoinData().getCoinName());
+        String coinName = CoinHelper.getCoinName(mTransactionDetail.getCoinData().getCoinUnit());
+        setToolbarTitle(coinName);
+
         rvHistory.setAdapter(mDetailAdapter);
         rvHistory.setLayoutManager(new LinearLayoutManager(this));
         rvHistory.setHasFixedSize(true);
@@ -97,7 +100,13 @@ public class DetailActivity extends BaseActivity implements DetailContract.Detai
     @Override
     public void showHistories(List<History> histories) {
         mDetailAdapter.setData(histories);
-        pbLoading.setVisibility(View.GONE);
+        pbHistoryLoading.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showFailureDialog(String message) {
+        showAlertDialog("Failure!",message);
+        pbHistoryLoading.setVisibility(View.GONE);
     }
 
     @Override

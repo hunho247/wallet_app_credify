@@ -2,6 +2,7 @@ package one.credify.wallet_app_credify.app.transfer.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import one.credify.wallet_app_credify.app.base.BaseActivity;
 import one.credify.wallet_app_credify.app.transfer.TransferContract;
 import one.credify.wallet_app_credify.app.transfer.presenter.TransferConfirmationPresenter;
 import one.credify.wallet_app_credify.core.model.Coin;
+import one.credify.wallet_app_credify.core.utils.CoinHelper;
 import one.credify.wallet_app_credify.core.utils.Constants;
 
 public class TransferConfirmationActivity extends BaseActivity implements TransferContract.TransferConfirmationView {
@@ -24,15 +26,22 @@ public class TransferConfirmationActivity extends BaseActivity implements Transf
     EditText etAmountInput;
     @BindView(R.id.tv_coin_unit)
     TextView tvCoinUnit;
+    @BindView(R.id.bt_currency_change)
+    Button btCurrencyChange;
 
     @OnClick(R.id.bt_set_max)
     public void btSetMaxOnClick() {
-
+        String amount = mTransferConfirmation.getCoinData().getCoinAmount().toString();
+        etAmountInput.setText(amount);
     }
 
     @OnClick(R.id.bt_currency_change)
     public void btCurrencyChangeOnClick() {
+        String temp1 = tvCoinUnit.getText().toString();
+        String temp2 = btCurrencyChange.getText().toString();
 
+        tvCoinUnit.setText(temp2);
+        btCurrencyChange.setText(temp1);
     }
 
     @OnClick(R.id.bt_transfer)
@@ -62,10 +71,12 @@ public class TransferConfirmationActivity extends BaseActivity implements Transf
     }
 
     private void setupUI() {
-        setToolbarTitle("Transfer " + mTransferConfirmation.getCoinData().getCoinName());
+        String coinName = CoinHelper.getCoinName(mTransferConfirmation.getCoinData().getCoinUnit());
+        setToolbarTitle("Transfer " + coinName);
         hideBackButton();
 
         tvTransferTo.setText("To: " + mTransferConfirmation.getQrData());
+        tvCoinUnit.setText(mTransferConfirmation.getCoinData().getCoinUnit());
     }
 
     @Override

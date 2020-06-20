@@ -1,12 +1,12 @@
 package one.credify.wallet_app_credify.app.base;
 
-import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import butterknife.BindView;
@@ -14,7 +14,7 @@ import butterknife.OnClick;
 import one.credify.wallet_app_credify.R;
 
 public class BaseActivity extends AppCompatActivity implements BaseActivityCallback {
-    public ProgressDialog progressDialog;
+    private AlertDialog.Builder alertDialog;
 
     @BindView(R.id.ib_back)
     ImageButton ibBack;
@@ -41,30 +41,15 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityCallb
     }
 
     @Override
-    public void showProgressDialog(String message) {
-        if (progressDialog != null) {
-            progressDialog.setMessage(message);
-            progressDialog.show();
-        } else {
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.setMessage(message);
-            progressDialog.show();
+    public void showAlertDialog(String title, String message) {
+        if (alertDialog == null) {
+            alertDialog = new AlertDialog.Builder(this);
         }
-    }
 
-    @Override
-    public void hideProgressDialog() {
-        if (progressDialog != null) {
-            progressDialog.hide();
-        }
-    }
-
-    @Override
-    public void cancelProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.cancel();
-        }
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setPositiveButton("Okay",null);
+        alertDialog.show();
     }
 
     @Override

@@ -14,6 +14,7 @@ import one.credify.wallet_app_credify.app.base.BaseActivity;
 import one.credify.wallet_app_credify.app.receive.ReceiveContract;
 import one.credify.wallet_app_credify.app.receive.presenter.ReceivePresenter;
 import one.credify.wallet_app_credify.core.model.Coin;
+import one.credify.wallet_app_credify.core.utils.CoinHelper;
 import one.credify.wallet_app_credify.core.utils.Constants;
 
 public class ReceiveActivity extends BaseActivity implements ReceiveContract.ReceiveView{
@@ -54,7 +55,8 @@ public class ReceiveActivity extends BaseActivity implements ReceiveContract.Rec
     }
 
     private void setupUI() {
-        setToolbarTitle("Receive " + mTransactionReceive.getCoinData().getCoinName());
+        String coinName = CoinHelper.getCoinName(mTransactionReceive.getCoinData().getCoinUnit());
+        setToolbarTitle("Receive " + coinName);
         hideBackButton();
 
         mTransactionReceive.generateQrCode();

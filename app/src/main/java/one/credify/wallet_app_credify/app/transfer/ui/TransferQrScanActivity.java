@@ -13,6 +13,7 @@ import one.credify.wallet_app_credify.app.base.BaseActivity;
 import one.credify.wallet_app_credify.app.transfer.TransferContract;
 import one.credify.wallet_app_credify.app.transfer.presenter.TransferQrScanPresenter;
 import one.credify.wallet_app_credify.core.model.Coin;
+import one.credify.wallet_app_credify.core.utils.CoinHelper;
 import one.credify.wallet_app_credify.core.utils.Constants;
 
 public class TransferQrScanActivity extends BaseActivity implements TransferContract.TransferQrScanView, ZXingScannerView.ResultHandler {
@@ -43,7 +44,8 @@ public class TransferQrScanActivity extends BaseActivity implements TransferCont
     }
 
     private void setupUI() {
-        setToolbarTitle("Transfer " + mTransferQrScan.getCoinData().getCoinName());
+        String coinName = CoinHelper.getCoinName(mTransferQrScan.getCoinData().getCoinUnit());
+        setToolbarTitle("Transfer " + coinName);
         hideBackButton();
 
         qrScanView.setAutoFocus(true);
