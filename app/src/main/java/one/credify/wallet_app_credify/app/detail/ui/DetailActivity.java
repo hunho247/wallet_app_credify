@@ -1,10 +1,14 @@
 package one.credify.wallet_app_credify.app.detail.ui;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +23,7 @@ import one.credify.wallet_app_credify.app.detail.DetailContract;
 import one.credify.wallet_app_credify.app.detail.adapter.DetailAdapter;
 import one.credify.wallet_app_credify.app.detail.presenter.DetailPresenter;
 import one.credify.wallet_app_credify.app.receive.ui.ReceiveActivity;
+import one.credify.wallet_app_credify.app.transfer.ui.TransferQrScanActivity;
 import one.credify.wallet_app_credify.core.model.Coin;
 import one.credify.wallet_app_credify.core.model.History;
 import one.credify.wallet_app_credify.core.utils.Constants;
@@ -44,7 +49,18 @@ public class DetailActivity extends BaseActivity implements DetailContract.Detai
 
     @OnClick(R.id.bt_transfer)
     public void btTransferOnClick() {
+        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, 0);
+        } else {
+            // Permission has already been granted
+            Coin coin = mTransactionDetail.getCoinData();
 
+            Intent intent = new Intent(this, TransferQrScanActivity.class);
+            intent.putExtra(Constants.DETAIL_COIN_INTENT, coin);
+            startActivity(intent);
+        }
     }
 
     @Override

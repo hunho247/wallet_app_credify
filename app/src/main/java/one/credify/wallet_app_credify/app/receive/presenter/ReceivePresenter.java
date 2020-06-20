@@ -24,7 +24,7 @@ public class ReceivePresenter implements ReceiveContract.TransactionReceivePrese
 
     @Override
     public void generateQrCode() {
-        String address = "sssssssssssssssssssssssssssssssssssssssssssshhhhhhhhhhhsss";//mCoin.getPublicKey();
+        String address = mCoin.getPublicKey();
 
         UseCaseHandler.getInstance().execute(new GenerateQr(),
                 new GenerateQr.RequestValues(address),
