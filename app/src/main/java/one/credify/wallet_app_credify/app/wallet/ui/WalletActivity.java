@@ -1,5 +1,6 @@
 package one.credify.wallet_app_credify.app.wallet.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,10 +13,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import one.credify.wallet_app_credify.R;
 import one.credify.wallet_app_credify.app.base.BaseActivity;
+import one.credify.wallet_app_credify.app.detail.ui.DetailActivity;
 import one.credify.wallet_app_credify.app.wallet.WalletContract;
 import one.credify.wallet_app_credify.app.wallet.adapter.WalletAdapter;
 import one.credify.wallet_app_credify.app.wallet.presenter.WalletPresenter;
 import one.credify.wallet_app_credify.core.model.Coin;
+import one.credify.wallet_app_credify.core.utils.Constants;
 import one.credify.wallet_app_credify.core.utils.RecyclerItemClickListener;
 
 public class WalletActivity extends BaseActivity implements WalletContract.WalletView {
@@ -35,10 +38,10 @@ public class WalletActivity extends BaseActivity implements WalletContract.Walle
         mTransactionWallet = new WalletPresenter(this);
         mWalletAdapter = new WalletAdapter();
 
-        setupUi(savedInstanceState);
+        setupUI();
     }
 
-    private void setupUi(Bundle savedInstanceState) {
+    private void setupUI() {
         mTransactionWallet.fetchWallets();
 
         rvWallet.setAdapter(mWalletAdapter);
@@ -51,6 +54,9 @@ public class WalletActivity extends BaseActivity implements WalletContract.Walle
                         mTransactionWallet.handleWalletClick(position);
                     }
                 }));
+
+        hideBackButton();
+        hideCloseButton();
     }
 
     @Override
@@ -60,7 +66,9 @@ public class WalletActivity extends BaseActivity implements WalletContract.Walle
 
     @Override
     public void startHistoryActivity(Coin coin) {
-
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(Constants.WALLET_COIN_INTENT, coin);
+        startActivity(intent);
     }
 
     @Override

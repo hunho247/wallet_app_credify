@@ -1,11 +1,12 @@
 package one.credify.wallet_app_credify.core.utils;
 
 public class Constants {
-
-    private static final int MOBILE_WALLET_ROLE_ID = 471;
-    private static final int SUPER_USER_ROLE_ID = 1;
-
-
+    // error messages
     public static final String ERROR_FETCHING = "Error fetching from services";
+    public static final String ERROR_OCCURRED = "Error occurred";
+    public static final String FAILED_TO_WRITE_DATA_TO_QR = "Failed to write data to qr";
 
+    // intent keys for activities
+    public static final String WALLET_COIN_INTENT = "WALLET~COIN~INTENT";
+    public static final String DETAIL_COIN_INTENT = "DETAIL~COIN~INTENT";
 }

@@ -14,21 +14,24 @@ public class FetchHistory extends UseCase<FetchHistory.RequestValues,
         FetchHistory.ResponseValue> {
     @Override
     protected void executeUseCase(FetchHistory.RequestValues requestValues) {
+        long clientId = requestValues.clientId;
+        long token = requestValues.token;
 
-        Repository.getHistoryService().getHistories().enqueue(new Callback<List<History>>() {
-            @Override
-            public void onResponse(Call<List<History>> call, Response<List<History>> response) {
-                if (response.isSuccessful()) {
-                    List<History> postList = response.body();
-                    getUseCaseCallback().onSuccess(new FetchHistory.ResponseValue(postList));
-                }
-            }
+        Repository.getHistoryService().getHistories().enqueue(
+                new Callback<List<History>>() {
+                    @Override
+                    public void onResponse(Call<List<History>> call, Response<List<History>> response) {
+                        if (response.isSuccessful()) {
+                            List<History> postList = response.body();
+                            getUseCaseCallback().onSuccess(new FetchHistory.ResponseValue(postList));
+                        }
+                    }
 
-            @Override
-            public void onFailure(Call<List<History>> call, Throwable t) {
-                getUseCaseCallback().onFailure(Constants.ERROR_FETCHING);
-            }
-        });
+                    @Override
+                    public void onFailure(Call<List<History>> call, Throwable t) {
+                        getUseCaseCallback().onFailure(Constants.ERROR_FETCHING);
+                    }
+                });
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
@@ -48,7 +51,7 @@ public class FetchHistory extends UseCase<FetchHistory.RequestValues,
             this.histories = histories;
         }
 
-        public List<History> getHistorys() {
+        public List<History> getHistories() {
             return histories;
         }
     }

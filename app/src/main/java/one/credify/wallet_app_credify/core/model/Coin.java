@@ -2,7 +2,9 @@ package one.credify.wallet_app_credify.core.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Coin {
+import java.io.Serializable;
+
+public class Coin implements Serializable {
     @SerializedName("coinName")
     private String coinName;
     @SerializedName("coinAmount")

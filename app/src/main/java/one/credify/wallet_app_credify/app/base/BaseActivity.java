@@ -79,12 +79,12 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityCallb
 
     @Override
     public void showCloseButton() {
-
+        ibCLose.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideCloseButton() {
-
+        ibCLose.setVisibility(View.GONE);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package one.credify.wallet_app_credify.app.history.adapter;
+package one.credify.wallet_app_credify.app.detail.adapter;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -16,18 +16,18 @@ import butterknife.ButterKnife;
 import one.credify.wallet_app_credify.R;
 import one.credify.wallet_app_credify.core.model.History;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
+public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder> {
     private List<History> mHistories;
 
     @Override
-    public HistoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DetailAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history_list,
                 parent, false);
-        return new HistoryAdapter.ViewHolder(v);
+        return new DetailAdapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final HistoryAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final DetailAdapter.ViewHolder holder, final int position) {
         final History history = mHistories.get(position);
         holder.mTvAddress.setText(history.getAddress());
         holder.mTvDateTime.setText(history.getDateTime());

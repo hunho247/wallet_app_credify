@@ -11,19 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".app.MainActivity">
+        <activity android:name=".app.wallet.ui.WalletActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".app.wallet.ui.WalletActivity"
+            android:name=".app.detail.ui.DetailActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".app.history.ui.HistoryActivity"
+            android:name=".app.receive.ui.ReceiveActivity"
             android:theme="@style/AppTheme" />
     </application>
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="12dp"
-    tools:context=".app.MainActivity"
+    tools:context=".app.wallet.ui.WalletActivity"
     tools:ignore="MissingClass">
 
     <androidx.recyclerview.widget.RecyclerView
