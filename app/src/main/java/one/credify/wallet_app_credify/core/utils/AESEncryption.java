@@ -1,43 +1,32 @@
 package one.credify.wallet_app_credify.core.utils;
 
 import android.media.MediaCodec;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import javax.crypto.Cipher;
-
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class AESEncryption {
     private static final String ALGORITHM = "AES";
     private static final String TRANSFORMATION = "AES";
 
-    // stub key map
-    private static final Map<String, String> encrytedCoins = Stream.of(new String[][] {
-            { "Hello", "World" },
-            { "John", "Doe" },
-    }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
+    // a mock map to store encrypted private keys of coins
+    private static final Map<String, String> encrytedCoins = new HashMap<String, String>() {{
+        put("7QI8+lv6BMWS0M08kq51ufOh1DspwdBSWzlQyK/3oZhavPzkbwmg0QndptDHomL5", "7117251d12dd28c5e02f5bd90ef813fd2e4e7c7b42563790ea459d5e6a62761c");
+        put("HHiRrPH0JAVTjrzV5FYlOMVgBZe7bX1NUJQ1OgZqTFdWSWU+ad1otfyg8uMF7bD7", "688545041FBBEF6AAEB380D57963C4329A56ED264E124731F05911C2F1062108");
+    }};
 
     public static void encrypt(String publicKey, String keyAES)
             throws MediaCodec.CryptoException {
-        doCrypto(Cipher.ENCRYPT_MODE, publicKey, keyAES, null);
     }
 
     public static String decrypt(String publicKey, String keyAES)
             throws MediaCodec.CryptoException {
-        // stub function to return decrypted key
-        doCrypto(Cipher.DECRYPT_MODE, publicKey, keyAES, null);
-
-        return encrytedCoins.get(publicKey);
+        // mock function to return decrypted key
+        return encrytedCoins.get(keyAES);
     }
 
     private static void doCrypto(int cipherMode, String publicKey, String keyAES, File file) throws MediaCodec.CryptoException {
-        // stub function to do AES encryption
+        // mock function to do AES encryption
     }
 }

@@ -18,10 +18,12 @@ public interface TransferContract {
     }
 
     interface TransferConfirmationView extends BaseView<TransferContract.TransferQrScanPresenter> {
-
+        void showFailureDialog(String message);
     }
 
     interface TransferConfirmationPresenter extends BasePresenter {
+        void transferCoin(String amount);
+
         void setCoinData(Coin coin);
 
         Coin getCoinData();

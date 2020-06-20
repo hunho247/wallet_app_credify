@@ -105,7 +105,7 @@ public class DetailActivity extends BaseActivity implements DetailContract.Detai
 
     @Override
     public void showFailureDialog(String message) {
-        showAlertDialog("Failure!",message);
+        showAlertDialog("Failure!", message);
         pbHistoryLoading.setVisibility(View.GONE);
     }
 

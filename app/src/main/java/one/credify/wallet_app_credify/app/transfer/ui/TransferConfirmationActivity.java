@@ -46,7 +46,12 @@ public class TransferConfirmationActivity extends BaseActivity implements Transf
 
     @OnClick(R.id.bt_transfer)
     public void btTransferOnClick() {
-
+        String amount = etAmountInput.getText().toString();
+        if (amount.matches("")) {
+            showAlertDialog("Warning!", "Please enter the amount");
+        }else {
+            mTransferConfirmation.transferCoin(amount);
+        }
     }
 
     @Override
@@ -66,7 +71,7 @@ public class TransferConfirmationActivity extends BaseActivity implements Transf
         Coin coin = (Coin) intent.getSerializableExtra(Constants.TRANSFER_COIN_INTENT);
         mTransferConfirmation.setCoinData(coin);
 
-        String qrData = (String)intent.getSerializableExtra(Constants.TRANSFER_QR_DATA);
+        String qrData = (String) intent.getSerializableExtra(Constants.TRANSFER_QR_DATA);
         mTransferConfirmation.setQrData(qrData);
     }
 
@@ -82,5 +87,10 @@ public class TransferConfirmationActivity extends BaseActivity implements Transf
     @Override
     public void setPresenter(TransferContract.TransferQrScanPresenter presenter) {
 
+    }
+
+    @Override
+    public void showFailureDialog(String message) {
+        showAlertDialog("Failure!", message);
     }
 }
