@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="12dp"
+    tools:context=".app.detail.ui.DetailActivity"
+    tools:ignore="MissingClass">
+
+    <LinearLayout
+        android:id="@+id/ll_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_transfer_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="120dp"
+            android:paddingTop="20dp"
+            android:text="To: 0x12345xxxxxx"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="120dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:layout_weight="1"
+                android:text="Amount:"
+                android:textColor="@color/black"
+                android:textSize="16dp"/>
+
+            <EditText
+                android:id="@+id/et_amount_input"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorTransfer"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/tv_coin_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="60dp"
+                android:layout_weight="1"
+                android:text="BTC"
+                android:textColor="@color/colorTextDisabled"
+                android:textSize="16dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="87dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/bt_set_max"
+                    android:layout_width="62dp"
+                    android:layout_height="32dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/bg_rectangle_area"
+                    android:text="MAX"
+                    android:textColor="@color/colorTextDisabled" />
+
+                <Button
+                    android:id="@+id/bt_currency_change"
+                    android:layout_width="62dp"
+                    android:layout_height="33dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/bg_rectangle_area"
+                    android:text="USD"
+                    android:textColor="@color/colorTextDisabled" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_transfer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_receive_button"
+            android:text="Transfer"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

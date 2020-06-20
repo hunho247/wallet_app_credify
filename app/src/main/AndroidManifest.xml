@@ -27,6 +27,9 @@
         <activity
             android:name=".app.transfer.ui.TransferQrScanActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".app.transfer.ui.TransferConfirmationActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

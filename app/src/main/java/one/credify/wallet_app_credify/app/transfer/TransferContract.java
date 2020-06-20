@@ -16,4 +16,18 @@ public interface TransferContract {
 
         Coin getCoinData();
     }
+
+    interface TransferConfirmationView extends BaseView<TransferContract.TransferQrScanPresenter> {
+
+    }
+
+    interface TransferConfirmationPresenter extends BasePresenter {
+        void setCoinData(Coin coin);
+
+        Coin getCoinData();
+
+        void setQrData(String qrData);
+
+        String getQrData();
+    }
 }

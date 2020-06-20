@@ -10,7 +10,6 @@ import butterknife.ButterKnife;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import one.credify.wallet_app_credify.R;
 import one.credify.wallet_app_credify.app.base.BaseActivity;
-import one.credify.wallet_app_credify.app.detail.ui.DetailActivity;
 import one.credify.wallet_app_credify.app.transfer.TransferContract;
 import one.credify.wallet_app_credify.app.transfer.presenter.TransferQrScanPresenter;
 import one.credify.wallet_app_credify.core.model.Coin;
@@ -32,6 +31,8 @@ public class TransferQrScanActivity extends BaseActivity implements TransferCont
 
         receiveUIData();
         setupUI();
+        // test
+        handleResultTest("ho thai hung");
     }
 
     private void receiveUIData() {
@@ -63,10 +64,15 @@ public class TransferQrScanActivity extends BaseActivity implements TransferCont
 
     @Override
     public void handleResult(Result result) {
-        String qrData = result.getText();
+        handleResultTest(result.getText());
+    }
 
-        Intent intent = new Intent(this, DetailActivity.class);
+    public void handleResultTest(String str) {
+        String qrData = str;
+
+        Intent intent = new Intent(this, TransferConfirmationActivity.class);
         intent.putExtra(Constants.TRANSFER_QR_DATA, qrData);
+        intent.putExtra(Constants.TRANSFER_COIN_INTENT, mTransferQrScan.getCoinData());
         startActivity(intent);
         finish();
     }

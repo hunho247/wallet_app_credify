@@ -10,4 +10,5 @@ public class Constants {
     public static final String WALLET_COIN_INTENT = "WALLET~COIN~INTENT";
     public static final String DETAIL_COIN_INTENT = "DETAIL~COIN~INTENT";
     public static final String TRANSFER_QR_DATA = "TRANSFER~QR~DATA";
+    public static final String TRANSFER_COIN_INTENT = "TRANSFER~COIN~INTENT";
 }
