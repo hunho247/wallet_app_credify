@@ -4,7 +4,6 @@ import one.credify.wallet_app_credify.app.base.BaseView;
 import one.credify.wallet_app_credify.app.transfer.TransferContract;
 import one.credify.wallet_app_credify.core.model.Coin;
 import one.credify.wallet_app_credify.core.usecase.ConnectCoinNetwork;
-import one.credify.wallet_app_credify.core.usecase.FetchHistory;
 import one.credify.wallet_app_credify.core.usecase.base.UseCase;
 import one.credify.wallet_app_credify.core.usecase.base.UseCaseHandler;
 

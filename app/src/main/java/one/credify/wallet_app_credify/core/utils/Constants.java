@@ -4,7 +4,8 @@ public class Constants {
     // error messages
     public static final String ERROR_FETCHING = "Error fetching from services";
     public static final String ERROR_OCCURRED = "Error occurred";
-    public static final String FAILED_TO_WRITE_DATA_TO_QR = "Failed to write data to qr";
+    public static final String ERROR_GENERATE_QR_WRITE_DATA = "Failed to write data to qr";
+    public static final String ERROR_GENERATE_QR_BITMAP_NULL = "Cannot generate bitmap";
 
     // intent keys for activities
     public static final String WALLET_COIN_INTENT = "WALLET~COIN~INTENT";

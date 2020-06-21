@@ -23,10 +23,10 @@ public class GenerateQr extends UseCase<GenerateQr.RequestValues, GenerateQr.Res
             if (bitmap != null) {
                 getUseCaseCallback().onSuccess(new ResponseValue(bitmap));
             } else {
-                getUseCaseCallback().onFailure(Constants.ERROR_OCCURRED);
+                getUseCaseCallback().onFailure(Constants.ERROR_GENERATE_QR_BITMAP_NULL);
             }
         } catch (WriterException e) {
-            getUseCaseCallback().onFailure(Constants.FAILED_TO_WRITE_DATA_TO_QR);
+            getUseCaseCallback().onFailure(Constants.ERROR_GENERATE_QR_WRITE_DATA);
         }
     }
 
